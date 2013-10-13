@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<package name="users" namespace="/users" extends="default">
+
+	    <action name="ListForm" class="com.ubse.user.action.getAllUser">
+			<result name="success">/users/Listall.jsp</result>
+		</action>
+
+		<action name="Listall">
+			<result name="success">/users/SignUp.jsp</result>
+			<result name="input">/users/Listall.jsp</result>
+		</action>
+	    
+		<action name="SignUpForm">
+			<result name="success">/users/SignUp.jsp</result>
+		</action>
+
+		<action name="SignUp"  class="com.ubse.user.action.SignUpAction">
+			<result name="success" type="chain">
+				<param name="actionName">ListForm</param> 
+			</result>
+		</action>
+		
+		<action name="DeleteAction" class="com.ubse.user.action.DeleteAction">
+			<interceptor-ref name="params"></interceptor-ref>
+			<result name="success" type="chain">
+				<param name="actionName">ListForm</param> 
+			</result>
+		</action>
+
+		<action name="LoginForm">
+			<result name="success">/users/login.jsp</result>
+		</action>
+
+		<action name="Login" class="com.ubse.user.action.LoginAction">
+		    <interceptor-ref name="params"></interceptor-ref>
+		    <result name="success" type="chain">
+				<param name="actionName">LoginForm</param> 
+			</result>
+		</action>
+
+		<action name="logout" class="com.ubse.user.action.LogoutAction">
+			<result name="success">/users/login.jsp</result>
+		</action>
+
+		<action name="editAccountForm">
+			<result>/users/editAccount.jsp</result>
+		</action>
+
+		<action name="EditAction" class="com.ubse.user.action.LoginAction">
+		    <interceptor-ref name="params"></interceptor-ref>
+			<result name="success" type="chain">
+				<param name="actionName">editAccountForm</param>
+			</result>
+		</action>
+		
+		<action name="EditAccountAction" class="com.ubse.user.action.EditAccountAction">
+		    <interceptor-ref name="params"></interceptor-ref>
+			<result name="success" type="chain">
+				<param name="actionName">ListForm</param>
+			</result>
+		</action>
+
+	</package>
+</struts>
